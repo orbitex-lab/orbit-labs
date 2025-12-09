@@ -11,7 +11,4 @@ export {
 } from './file-size.constants';
 
 // Validation constants
-export {
-  ROOT_ERROR_KEY,
-  FIELD_PATH_SEPARATOR,
-} from './validation.constants';
+export { ROOT_ERROR_KEY, FIELD_PATH_SEPARATOR } from './validation.constants';

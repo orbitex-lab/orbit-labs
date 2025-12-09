@@ -12,15 +12,9 @@
 // import { normalizeFileSize } from 'orbit-labs/common';
 // import { zodValidator } from 'orbit-labs/form';
 
-export type {
-  FileSizeUnit,
-  NormalizedFileSize,
-} from './types';
+export type { FileSizeUnit, NormalizedFileSize } from './types';
 
-export {
-  normalizeFileSize,
-  zodValidator,
-} from './utils';
+export { normalizeFileSize, zodValidator } from './utils';
 
 export {
   FILE_SIZE_UNITS,

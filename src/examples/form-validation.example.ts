@@ -179,7 +179,8 @@ export const exampleNestedPathParsing = (): void => {
     const depth = fieldLevels.length;
     const indent = '  '.repeat(depth);
 
-    console.log(`${indent}↳ ${fieldLevels[fieldLevels.length - 1]}: ${message}`);
+    console.log(
+      `${indent}↳ ${fieldLevels[fieldLevels.length - 1]}: ${message}`
+    );
   });
 };
-
