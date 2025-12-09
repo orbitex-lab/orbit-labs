@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.0.0 (2025-12-09)
+
+
+### Features
+
+* add staging branch workflow for pre-release testing ([d8b7316](https://github.com/orbitex-lab/orbit-labs/commit/d8b7316bb9e309e7ad004815b01873e2e465c3da))
+
+
+### Bug Fixes
+
+* exclude examples from linting and update TypeScript ESLint to v8 ([9760f07](https://github.com/orbitex-lab/orbit-labs/commit/9760f07e05082199cae46044cc0167a5065394b8))
+
 ## [2.0.0] - 2025-12-10
 
 ### Added
