@@ -1,0 +1,51 @@
+# Source files
+src/
+tsconfig.json
+.editorconfig
+.prettierrc.json
+.eslintrc.json
+
+# Tests (when added)
+**/*.test.ts
+**/*.spec.ts
+__tests__/
+test/
+
+# Examples
+src/examples/
+
+# Documentation that doesn't need to be published
+CONTRIBUTING.md
+ARCHITECTURE.md
+STRUCTURE.md
+QUICKSTART.md
+
+# Development files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+*.tsbuildinfo
+npm-debug.log*
+yarn-debug.log*
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Package manager
+node_modules/
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
