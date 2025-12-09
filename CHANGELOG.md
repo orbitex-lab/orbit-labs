@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1](https://github.com/orbitex-lab/orbit-labs/compare/v1.1.0...v1.1.1) (2025-12-09)
+
+
+### Bug Fixes
+
+* bundle zod and libphonenumber-js as dependencies for zero-config installation ([3b58c6f](https://github.com/orbitex-lab/orbit-labs/commit/3b58c6f53a10507139331b829897d7aeb118bbae))
+* make all peer dependencies optional for modular installation ([910ef56](https://github.com/orbitex-lab/orbit-labs/commit/910ef5695d6fcaf42b3b3d00a95f43f04a542b7f))
+* move libphonenumber-js to regular dependency to avoid user installation errors ([e564412](https://github.com/orbitex-lab/orbit-labs/commit/e564412667dbc0040ec1e8dbbe301c08a6492f88))
+
 ## [1.1.0](https://github.com/orbitex-lab/orbit-labs/compare/v1.0.2...v1.1.0) (2025-12-09)
 
 
