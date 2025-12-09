@@ -1,74 +1,70 @@
 # Contributing to orbit-labs
 
-Thank you for your interest in contributing to orbit-labs! This document provides guidelines and instructions for contributing.
+Thank you for your interest in contributing! 🎉
 
-## 🚀 Release Process (Automated)
+## 🚀 Release Process (Fully Automated)
 
-We use [Release Please](https://github.com/googleapis/release-please) with a **three-branch workflow**:
+We use [Release Please](https://github.com/googleapis/release-please) for automated versioning and publishing.
 
-```
-feature → develop → staging → main → NPM
-### Workflow Steps:
+### Flexible Workflow - No Mandatory Branch Structure
 
-1. **Create feature branch from `develop`:**
+**All branches run CI automatically!** You can work with any branch structure you prefer.
+
+### Simple Workflow:
+
+1. **Create a feature branch:**
    ```bash
-   git checkout develop
+   git checkout main
+   git pull origin main
    git checkout -b feat/my-feature
    ```
 
-2. **Commit with [Conventional Commits](https://www.conventionalcommits.org/):**
+2. **Make changes with [Conventional Commits](https://www.conventionalcommits.org/):**
    ```bash
    git commit -m "feat: add new validation function"
-   git commit -m "fix: resolve edge case in zodValidator"
-   git commit -m "docs: update README examples"
+   git commit -m "fix: resolve edge case"
+   git commit -m "docs: update examples"
    ```
 
-3. **Merge to `develop` (integration testing):**
+3. **Push and create a Pull Request:**
    ```bash
-   git checkout develop
-   git merge feat/my-feature
-   git push origin develop
+   git push origin feat/my-feature
    ```
-   - ✅ CI runs (tests, builds, formatting)
-   - ❌ No publish
+   - ✅ CI runs automatically (tests, types, build, lint, format)
+   - ✅ Tests on Node.js 18.x and 20.x
+   - Get feedback before merging!
 
-4. **Merge `develop` to `staging` (pre-release validation):**
-   ```bash
-   git checkout staging
-   git merge develop
-   git push origin staging
-   ```
-   - ✅ CI runs + staging deployment workflow
-   - ✅ Build artifacts validated
-   - ❌ No publish (safe testing environment)
+4. **Merge to main:**
+   - ✅ CI runs again
+   - ✅ Release Please analyzes commits
+   - ✅ Creates a **Release PR** with:
+     - Version bump (semantic versioning)
+     - Updated CHANGELOG.md
+     - Updated package.json
 
-5. **Merge `staging` to `main` (production release):**
-   ```bash
-   git checkout main
-   git merge staging
-   git push origin main
-   ```
-   - ✅ CI runs
-   - ✅ **Release Please creates a release PR** with version bump
-
-6. **Merge the Release PR:**
+5. **Review and merge the Release PR:**
    - 🚀 **Auto-publishes to NPM**
-   - 🏷️ Creates GitHub release tag
-   - 📝 Updates CHANGELOG.mdnch** (after PR merge):
-   ```bash
-   git push origin main
-   ```
+   - 🏷️ Creates GitHub release & tag
+   - 📝 CHANGELOG updated
 
-3. **Release Please creates a PR** automatically with:
-   - Updated version in `package.json`
-   - Updated `CHANGELOG.md`
-   - Proper semantic version based on commits
+### Optional: Custom Branch Strategy
 
-4. **Merge the Release PR** → Package is automatically:
-   - Built and published to NPM
-   - Tagged on GitHub
+You can use any branch structure that fits your workflow:
 
-### Commit Message Format:
+```bash
+# Example 1: Direct to main
+feature → main
+
+# Example 2: Development branch
+feature → develop → main
+
+# Example 3: Full workflow
+feature → develop → staging → main
+```
+
+**All branches are tested!** CI runs on every push and PR, regardless of branch name.
+
+## Commit Message Format
 
 Follow [Conventional Commits](https://www.conventionalcommits.org/):
 
@@ -91,18 +87,18 @@ feat!: remove deprecated validateForm function
 
 ## Development Setup
 
-1. **Fork and clone the repository**
+1. **Fork and clone:**
    ```bash
    git clone https://github.com/orbitex-lab/orbit-labs.git
    cd orbit-labs
    ```
 
-2. **Install dependencies**
+2. **Install dependencies:**
    ```bash
    npm install
    ```
 
-3. **Build the project**
+3. **Build:**
    ```bash
    npm run build
    ```
@@ -112,184 +108,83 @@ feat!: remove deprecated validateForm function
 ```
 orbit-labs/
 ├── src/
-│   ├── common/          # Common utilities module entry
-│   ├── form/            # Form validation module entry
+│   ├── common/          # Common utilities module
+│   ├── form/            # Form validation module
 │   ├── types/           # TypeScript type definitions
-│   │   ├── common.types.ts
-│   │   ├── form.types.ts
-│   │   └── index.ts
 │   ├── utils/           # Core utility functions
-│   │   ├── file-size.util.ts
-│   │   ├── validation.util.ts
-│   │   └── index.ts
 │   ├── constants/       # Constants and configuration
-│   │   ├── file-size.constants.ts
-│   │   ├── validation.constants.ts
-│   │   └── index.ts
-│   ├── examples/        # Usage examples (excluded from build)
-│   │   ├── file-size.example.ts
-│   │   ├── form-validation.example.ts
-│   │   └── index.ts
+│   ├── examples/        # Usage examples
 │   └── index.ts         # Main entry point
-├── dist/                # Compiled output (generated)
+├── dist/                # Compiled output
+├── .github/workflows/   # CI/CD workflows
 ├── package.json
-├── tsconfig.json
-└── README.md
+└── tsconfig.json
+```
+
+## Development Commands
+
+```bash
+npm run typecheck    # Type checking
+npm run build        # Build package
+npm run build:watch  # Watch mode
+npm run lint         # Lint code
+npm run format       # Format code
+npm run format:check # Check formatting
+npm run clean        # Clean build
 ```
 
 ## Coding Standards
 
 ### TypeScript
-
-- Use strict TypeScript settings (already configured)
-- All functions must have explicit return types
-- Use `const` for immutable values, `let` only when necessary
-- Prefer type aliases (`type`) over interfaces for simple types
-- Use interfaces for object shapes that may be extended
+- Use strict TypeScript settings
+- Explicit return types for all functions
+- Prefer `const` over `let`
+- Use `readonly` for immutability
 
 ### Naming Conventions
-
-- **Files**: `kebab-case.type.ts`, `kebab-case.util.ts`, `kebab-case.constants.ts`
+- **Files**: `kebab-case.type.ts`, `kebab-case.util.ts`
 - **Types**: `PascalCase`
 - **Functions**: `camelCase`
 - **Constants**: `UPPER_SNAKE_CASE`
-- **Private functions**: Prefix with `_` or mark as internal with JSDoc
 
-### Code Organization
+### Documentation
+- JSDoc comments for all public APIs
+- Include `@param`, `@returns`, `@throws`, `@example`
+- Inline comments for complex logic
 
-1. **Separation of Concerns**
-   - Types in `src/types/`
-   - Utilities in `src/utils/`
-   - Constants in `src/constants/`
-   - Examples in `src/examples/`
+## Pull Request Process
 
-2. **Module Exports**
-   - Each directory has an `index.ts` for clean exports
-   - Use barrel exports pattern
-   - Re-export from submodules in entry points
+1. Create feature branch
+2. Make changes with conventional commits
+3. Run tests: `npm run typecheck && npm run build`
+4. Format: `npm run format`
+5. Push and create PR
+6. CI runs automatically
+7. Merge after review
 
-3. **Documentation**
-   - All public functions must have JSDoc comments
-   - Include `@param`, `@returns`, `@throws`, and `@example`
-   - Add inline comments for complex logic
+## Adding New Features
 
-## 💬 Getting Help
+1. Add type definitions in `src/types/`
+2. Create utility in `src/utils/`
+3. Add constants in `src/constants/` (if needed)
+4. Export from module entry point
+5. Add examples in `src/examples/`
+6. Update README with usage
 
-- 📖 [Full Documentation](README.md)
+## Best Practices
+
+- ✅ Immutability with `readonly` and `as const`
+- ✅ Type safety with discriminated unions
+- ✅ Input validation and typed errors
+- ✅ Comprehensive JSDoc documentation
+- ✅ Usage examples for new features
+
+## Questions?
+
+- 📖 [Documentation](README.md)
 - 🐛 [Report Issues](https://github.com/orbitex-lab/orbit-labs/issues)
 - 💡 [Request Features](https://github.com/orbitex-lab/orbit-labs/issues/new)
-- 🤝 [Contributing Guide](CONTRIBUTING.md)
 
 ---
 
 **Happy coding! 🚀**
-
-### 3. Formatting
-```bash
-npm run format
-```
-
-### 4. Building
-```bash
-npm run build
-```
-
-### 5. Watch Mode
-```bash
-npm run build:watch
-```
-
-## Pull Request Process
-
-1. **Create a feature branch**
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-
-2. **Make your changes**
-   - Write clean, documented code
-   - Follow the project structure
-   - Add examples if adding new features
-
-3. **Test your changes**
-   ```bash
-   npm run typecheck
-   npm run build
-   ```
-
-4. **Format and lint**
-   ```bash
-   npm run format
-   npm run lint
-   ```
-
-5. **Commit your changes**
-   ```bash
-   git add .
-   git commit -m "feat: add new feature"
-   ```
-   
-   Use conventional commits:
-   - `feat:` for new features
-   - `fix:` for bug fixes
-   - `docs:` for documentation
-   - `refactor:` for refactoring
-   - `test:` for tests
-   - `chore:` for maintenance
-
-6. **Push and create PR**
-   ```bash
-   git push origin feature/your-feature-name
-   ```
-
-## Adding New Features
-
-### Adding a New Utility Function
-
-1. Create the type definitions in `src/types/`
-2. Create the utility in `src/utils/`
-3. Add constants if needed in `src/constants/`
-4. Export from the appropriate module entry point
-5. Add examples in `src/examples/`
-6. Update README with usage examples
-
-### Example: Adding a New Function
-
-```typescript
-// 1. Add types in src/types/your-feature.types.ts
-export interface YourFeatureResult {
-  readonly value: string;
-}
-
-// 2. Add utility in src/utils/your-feature.util.ts
-/**
- * Your feature description
- * @param input - Description
- * @returns Description
- */
-export const yourFeature = (input: string): YourFeatureResult => {
-  return { value: input };
-};
-
-// 3. Export from src/utils/index.ts
-export { yourFeature } from './your-feature.util';
-
-// 4. Add example in src/examples/your-feature.example.ts
-export const exampleYourFeature = (): void => {
-  const result = yourFeature('test');
-  console.log(result);
-};
-```
-
-## Best Practices
-
-1. **Immutability**: Use `readonly`, `as const`, `Object.freeze()`
-2. **Type Safety**: Leverage discriminated unions, strict null checks
-3. **Error Handling**: Validate inputs, throw typed errors
-4. **Documentation**: JSDoc for all public APIs
-5. **Testing**: Add examples demonstrating usage
-6. **Performance**: Consider tree-shaking and bundle size
-
-## Questions?
-
-Feel free to open an issue for questions or discussions!

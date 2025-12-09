@@ -432,27 +432,44 @@ import type { NormalizedFileSize } from 'orbit-labs/common';
 
 ## Requirements
 
-- Node.js >= 16.0.0
+- Node.js >= 18.0.0
 - TypeScript >= 5.0.0 (if using TypeScript)
 - Zod >= 3.0.0 (peer dependency)
 
-## 🔄 Development Workflow
+## 🔄 Development & Release Workflow
 
-We use a three-branch strategy for safe releases:
+We use **conventional commits** with automated releases via [Release Please](https://github.com/googleapis/release-please).
 
+### Simple Workflow:
+
+```bash
+# 1. Create feature branch from main (or any branch)
+git checkout -b feat/my-feature
+
+# 2. Commit using conventional commits
+git commit -m "feat: add new validation helper"
+git commit -m "fix: resolve edge case"
+
+# 3. Push and create PR
+git push origin feat/my-feature
+
+# 4. Merge PR to main
+# ✅ CI runs automatically
+# ✅ Release Please analyzes commits
+# ✅ Creates release PR with version bump
+
+# 5. Merge release PR
+# 🚀 Auto-publishes to NPM!
 ```
-feature → develop → staging → main → NPM
-```
 
-- **`develop`** - Active development, frequent commits
-- **`staging`** - Pre-release testing, stable features  
-- **`main`** - Production releases, triggers NPM publish
+### Commit Types & Versioning:
 
-### Contributing:
-1. Create feature branch from `develop`
-2. Merge to `develop` for integration testing
-3. Merge to `staging` for pre-release validation
-4. Merge to `main` for NPM release (automated)
+- `feat:` → Minor version (2.0.0 → 2.1.0)
+- `fix:` → Patch version (2.0.0 → 2.0.1)
+- `feat!:` or `BREAKING CHANGE:` → Major version (2.0.0 → 3.0.0)
+- `docs:`, `chore:`, `refactor:` → No version bump
+
+**All branches are tested automatically!** No mandatory develop/staging branches required.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
