@@ -26,10 +26,9 @@ npm install orbit-labs zod
 pnpm add orbit-labs zod
 # or
 yarn add orbit-labs zod
-
-# For phone masking features, also install:
-npm install libphonenumber-js
 ```
+
+> **Note:** `libphonenumber-js` is automatically installed for phone masking features.
 
 ## 🚀 Quick Start
 
