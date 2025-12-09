@@ -1,6 +1,6 @@
 {
   "name": "orbit-labs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A production-ready, type-safe utility library for form validation and common operations",
   "author": "orbitex-lab",
   "license": "MIT",

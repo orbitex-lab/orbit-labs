@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1](https://github.com/orbitex-lab/orbit-labs/compare/v1.0.0...v1.0.1) (2025-12-09)
+
+
+### Bug Fixes
+
+* normalize repository URL format ([71644e8](https://github.com/orbitex-lab/orbit-labs/commit/71644e8ee26e69c229f97f41b6467bf5fda5f149))
+
 ## 1.0.0 (2025-12-09)
 
 
