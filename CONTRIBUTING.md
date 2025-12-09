@@ -53,77 +53,39 @@ Releases are automated using Release Please:
 
 By contributing, you agree that your contributions will be licensed under the MIT License.
 
-You can use any branch structure that fits your workflow:
-
-```bash
-# Example 1: Direct to main
-feature → main
-
-# Example 2: Development branch
-feature → develop → main
-
-# Example 3: Full workflow
-feature → develop → staging → main
-```
-
-**All branches are tested!** CI runs on every push and PR, regardless of branch name.
-
-## Commit Message Format
-
-Follow [Conventional Commits](https://www.conventionalcommits.org/):
-
-- `feat:` → Minor version bump (2.0.0 → 2.1.0)
-- `fix:` → Patch version bump (2.0.0 → 2.0.1)
-- `docs:` → No version bump
-- `chore:` → No version bump
-- `refactor:` → No version bump
-- `feat!:` or `BREAKING CHANGE:` → Major version bump (2.0.0 → 3.0.0)
-
-**Examples:**
-```bash
-feat: add zodValidator function
-fix: handle nested object validation
-docs: update API documentation
-chore: update dependencies
-refactor: optimize file size calculation
-feat!: remove deprecated validateForm function
-```
-
-## Development Setup
-
-1. **Fork and clone:**
-   ```bash
-   git clone https://github.com/orbitex-lab/orbit-labs.git
-   cd orbit-labs
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-
-3. **Build:**
-   ```bash
-   npm run build
-   ```
-
 ## Project Structure
 
 ```
 orbit-labs/
 ├── src/
 │   ├── common/          # Common utilities module
+│   │   └── index.ts     # Exports: normalizeFileSize
 │   ├── form/            # Form validation module
+│   │   └── index.ts     # Exports: zodValidator
+│   ├── security/        # Security utilities module
+│   │   └── index.ts     # Exports: maskPhoneNumbers
 │   ├── types/           # TypeScript type definitions
 │   ├── utils/           # Core utility functions
 │   ├── constants/       # Constants and configuration
-│   ├── examples/        # Usage examples
-│   └── index.ts         # Main entry point
+│   ├── examples/        # Module-specific usage examples
+│   │   ├── common/
+│   │   ├── form/
+│   │   └── security/
+│   └── index.ts         # Disabled (shows error message)
 ├── dist/                # Compiled output
-├── .github/workflows/   # CI/CD workflows
-├── package.json
-└── tsconfig.json
+└── .github/workflows/   # CI/CD workflows
 ```
+
+## Module System
+
+**Import from specific modules only:**
+```typescript
+import { normalizeFileSize } from 'orbit-labs/common';
+import { zodValidator } from 'orbit-labs/form';
+import { maskPhoneNumbers } from 'orbit-labs/security';
+```
+
+**Main export is disabled** - importing from `'orbit-labs'` will throw an error directing users to use specific modules.
 
 ## Development Commands
 
@@ -135,6 +97,35 @@ npm run lint         # Lint code
 npm run format       # Format code
 npm run format:check # Check formatting
 npm run clean        # Clean build
+```
+
+## Adding New Features
+
+### 1. Choose the Right Module
+- **`common/`** - General utilities (file operations, formatting, etc.)
+- **`form/`** - Form validation and processing
+- **`security/`** - Security-related utilities (masking, sanitization, etc.)
+
+### 2. Implementation Steps
+1. Add type definitions in `src/types/`
+2. Create utility in `src/utils/`
+3. Add constants in `src/constants/` (if needed)
+4. Export from module's `index.ts` (e.g., `src/form/index.ts`)
+5. Add examples in `src/examples/<module>/`
+6. Update README with usage examples
+
+### 3. Example Structure
+```typescript
+// src/examples/form/my-feature.example.ts
+import { myFeature } from 'orbit-labs/form';
+
+// Example 1: Basic usage
+const result1 = myFeature(input1);
+console.log(result1);
+
+// Example 2: With options
+const result2 = myFeature(input2, { option: true });
+console.log(result2);
 ```
 
 ## Coding Standards
@@ -166,17 +157,9 @@ npm run clean        # Clean build
 6. CI runs automatically
 7. Merge after review
 
-## Adding New Features
-
-1. Add type definitions in `src/types/`
-2. Create utility in `src/utils/`
-3. Add constants in `src/constants/` (if needed)
-4. Export from module entry point
-5. Add examples in `src/examples/`
-6. Update README with usage
-
 ## Best Practices
 
+- ✅ Modular exports (`orbit-labs/common`, `orbit-labs/form`, `orbit-labs/security`)
 - ✅ Immutability with `readonly` and `as const`
 - ✅ Type safety with discriminated unions
 - ✅ Input validation and typed errors
