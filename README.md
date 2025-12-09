@@ -21,17 +21,14 @@ A production-ready, highly scalable, type-safe utility library for form validati
 ## 📦 Installation
 
 ```bash
-# Install orbit-labs
 npm install orbit-labs
-
-# For form validation, also install:
-npm install zod
-
-# For phone masking, also install:
-npm install libphonenumber-js
+# or
+pnpm add orbit-labs
+# or
+yarn add orbit-labs
 ```
 
-> **Note:** Only install the peer dependencies you need for the modules you're using.
+> All dependencies are included - no additional packages needed!
 
 ## 🚀 Quick Start
 
