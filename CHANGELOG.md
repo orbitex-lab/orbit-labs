@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0](https://github.com/orbitex-lab/orbit-labs/compare/v1.0.2...v1.1.0) (2025-12-09)
+
+
+### Features
+
+* add phone masking security module and simplify package structure ([6204264](https://github.com/orbitex-lab/orbit-labs/commit/6204264d7b7a3c50c817e9ed13730df6cbd1beae))
+
 ## [1.0.2](https://github.com/orbitex-lab/orbit-labs/compare/v1.0.1...v1.0.2) (2025-12-09)
 
 
