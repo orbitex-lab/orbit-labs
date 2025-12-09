@@ -30,66 +30,53 @@
     "utilities",
     "validation",
     "file-size",
+    "phone-masking",
+    "security",
+    "privacy",
+    "data-masking",
     "scalable",
     "production-ready"
   ],
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "default": "./dist/index.js"
+    "./form": {
+      "types": "./dist/form/index.d.ts",
+      "import": "./dist/form/index.js",
+      "default": "./dist/form/index.js"
     },
     "./common": {
       "types": "./dist/common/index.d.ts",
       "import": "./dist/common/index.js",
       "default": "./dist/common/index.js"
     },
-    "./form": {
-      "types": "./dist/form/index.d.ts",
-      "import": "./dist/form/index.js",
-      "default": "./dist/form/index.js"
-    },
-    "./types": {
-      "types": "./dist/types/index.d.ts",
-      "import": "./dist/types/index.js",
-      "default": "./dist/types/index.js"
-    },
-    "./utils": {
-      "types": "./dist/utils/index.d.ts",
-      "import": "./dist/utils/index.js",
-      "default": "./dist/utils/index.js"
-    },
-    "./constants": {
-      "types": "./dist/constants/index.d.ts",
-      "import": "./dist/constants/index.js",
-      "default": "./dist/constants/index.js"
+    "./security": {
+      "types": "./dist/security/index.d.ts",
+      "import": "./dist/security/index.js",
+      "default": "./dist/security/index.js"
     }
   },
   "typesVersions": {
     "*": {
-      "common": [
-        "./dist/common/index.d.ts"
-      ],
       "form": [
         "./dist/form/index.d.ts"
       ],
-      "types": [
-        "./dist/types/index.d.ts"
+      "common": [
+        "./dist/common/index.d.ts"
       ],
-      "utils": [
-        "./dist/utils/index.d.ts"
-      ],
-      "constants": [
-        "./dist/constants/index.d.ts"
+      "security": [
+        "./dist/security/index.d.ts"
       ]
     }
   },
   "peerDependencies": {
+    "libphonenumber-js": "^1.12.31",
     "zod": "^3.0.0 || ^4.0.0"
   },
   "peerDependenciesMeta": {
     "zod": {
       "optional": false
+    },
+    "libphonenumber-js": {
+      "optional": true
     }
   },
   "devDependencies": {

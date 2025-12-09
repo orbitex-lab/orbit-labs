@@ -3,7 +3,10 @@
  * @description File size normalization utilities
  */
 
-import type { FileSizeUnit, NormalizedFileSize } from '../types/common.types';
+import type {
+  FileSizeUnit,
+  NormalizedFileSize,
+} from '../types/common.types.js';
 
 /**
  * Normalizes a file size in bytes to a human-readable format

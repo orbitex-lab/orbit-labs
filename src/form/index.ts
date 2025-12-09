@@ -1,13 +1,6 @@
 /**
  * @module form
- * @description Form validation module entry point
+ * @description Form validation with Zod
  */
 
-// Re-export utilities
-export { zodValidator } from '../utils/validation.util';
-
-// Re-export constants
-export {
-  ROOT_ERROR_KEY,
-  FIELD_PATH_SEPARATOR,
-} from '../constants/validation.constants';
+export { zodValidator } from '../utils/validation.util.js';

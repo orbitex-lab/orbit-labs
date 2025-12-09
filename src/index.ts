@@ -1,25 +1,18 @@
 /**
  * @module orbit-labs
- * @description Main entry point for the orbit-labs package
+ * @description Main entry point - DO NOT import from here
  *
- * This is the root export file. Import from submodules for better tree-shaking:
- * - `orbit-labs/common` for common utilities
+ * Always import from specific modules:
  * - `orbit-labs/form` for form validation
+ * - `orbit-labs/common` for file utilities
+ * - `orbit-labs/security` for data masking
  */
 
-// Note: This file serves as a fallback entry point
-// Users should import from submodules for optimal tree-shaking:
-// import { normalizeFileSize } from 'orbit-labs/common';
-// import { zodValidator } from 'orbit-labs/form';
-
-export type { FileSizeUnit, NormalizedFileSize } from './types';
-
-export { normalizeFileSize, zodValidator } from './utils';
-
-export {
-  FILE_SIZE_UNITS,
-  BYTES_PER_KB,
-  MAX_SAFE_FILE_SIZE,
-  ROOT_ERROR_KEY,
-  FIELD_PATH_SEPARATOR,
-} from './constants';
+throw new Error(
+  `❌ Direct import from 'orbit-labs' is not allowed!\n\n` +
+    `Please import from specific modules:\n` +
+    `  ✓ import { zodValidator } from 'orbit-labs/form'\n` +
+    `  ✓ import { normalizeFileSize } from 'orbit-labs/common'\n` +
+    `  ✓ import { maskPhoneNumbers } from 'orbit-labs/security'\n\n` +
+    `See documentation: https://github.com/orbitex-lab/orbit-labs#readme`
+);

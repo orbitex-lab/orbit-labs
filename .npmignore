@@ -5,7 +5,7 @@ tsconfig.json
 .prettierrc.json
 .eslintrc.json
 
-# Tests (when added)
+# Tests
 **/*.test.ts
 **/*.spec.ts
 __tests__/
@@ -14,11 +14,8 @@ test/
 # Examples
 src/examples/
 
-# Documentation that doesn't need to be published
+# Documentation
 CONTRIBUTING.md
-ARCHITECTURE.md
-STRUCTURE.md
-QUICKSTART.md
 
 # Development files
 .vscode/

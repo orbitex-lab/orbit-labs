@@ -10,7 +10,7 @@ A production-ready, highly scalable, type-safe utility library for form validati
 
 - 🔒 **Fully Type-Safe** - Strict TypeScript with 15+ compiler checks
 - 📦 **Tree-Shakeable** - Import only what you need with ES modules
-- 🎯 **Zero Dependencies** - Only peer dependency on Zod for validation
+- 🎯 **Zero Dependencies** - Only peer dependencies (Zod for validation, libphonenumber-js for masking)
 - 🏗️ **Scalable Architecture** - Modular design following SOLID principles
 - 💪 **Production Ready** - Comprehensive error handling and validation
 - 📝 **Well Documented** - JSDoc comments for excellent IDE support
@@ -26,9 +26,14 @@ npm install orbit-labs zod
 pnpm add orbit-labs zod
 # or
 yarn add orbit-labs zod
+
+# For phone masking features, also install:
+npm install libphonenumber-js
 ```
 
 ## 🚀 Quick Start
+
+**Important:** Always import from specific modules (`/form`, `/common`, `/security`):
 
 ### Form Validation
 
@@ -48,8 +53,6 @@ const errors = zodValidator(schema, {
 
 if (Object.keys(errors).length === 0) {
   console.log('Valid!');
-} else {
-  console.log('Errors:', errors);
 }
 ```
 
@@ -62,7 +65,24 @@ const size = normalizeFileSize(1536000);
 console.log(`${size.size} ${size.unit}`); // "1.46 MB"
 ```
 
-## 📖 Documentation
+### Phone Number Masking
+
+```typescript
+import { maskPhoneNumbers } from 'orbit-labs/security';
+
+const text = 'Call me at +1 415-555-0123';
+const masked = maskPhoneNumbers(text);
+console.log(masked); // "Call me at +* ***-***-**23"
+
+// Custom options
+maskPhoneNumbers(text, { 
+  unmaskedDigits: 4,
+  maskChar: '•',
+  allowedCountries: ['US', 'BD']
+});
+```
+
+## 📖 API Documentation
 
 ### Form Validation (`orbit-labs/form`)
 
@@ -90,11 +110,14 @@ if (Object.keys(errors).length > 0) {
 
 #### `normalizeFileSize(bytes: number): NormalizedFileSize`
 
-**Features:**
-- ✅ Type-safe with Zod inference
-- ✅ Nested field error paths
-- ✅ Simple error object format
-- ✅ Empty object when valid
+Converts byte values to human-readable file sizes.
+
+```typescript
+import { normalizeFileSize } from 'orbit-labs/common';
+
+const size = normalizeFileSize(5242880);
+// {
+//   size: "5.00 MB",
 //   unit: "MB",
 //   value: 5,
 //   bytes: 5242880
@@ -107,149 +130,127 @@ if (Object.keys(errors).length > 0) {
 - ✅ Decimal precision (2 places)
 - ✅ Original bytes preserved
 
+### Security Utilities (`orbit-labs/security`)
+
+#### `maskPhoneNumbers(text: string, options?: MaskPhoneNumberOptions): string`
+
+Masks phone numbers in text for privacy. Supports all countries via libphonenumber-js.
+
+```typescript
+import { maskPhoneNumbers } from 'orbit-labs/security';
+
+// Basic masking
+maskPhoneNumbers('Call +1 415-555-0123');
+// => "Call **********23"
+
+// Custom options
+maskPhoneNumbers(text, {
+  maskChar: '•',           // Custom mask character
+  unmaskedDigits: 4,       // Keep last 4 digits visible
+  defaultCountry: 'US',    // Default country for parsing
+  allowedCountries: ['US', 'BD'], // Only mask specific countries
+});
+```
+
+**Options:**
+- `maskChar` - Character for masking (default: `"*"`)
+- `unmaskedDigits` - Trailing digits to keep visible (default: `2`)
+- `defaultCountry` - Default country code for parsing (e.g., `"US"`)
+- `allowedCountries` - Array of country codes to mask (masks all if omitted)
+
+**Features:**
+- ✅ International phone number support (all countries)
+- ✅ Preserves formatting characters
+- ✅ Country-specific filtering
+- ✅ Configurable masking level
+- ✅ Multiple numbers in text
+
 ## 🏗️ Architecture
 
-### Modular Structure
+### Simple Structure
 
 ```
 orbit-labs/
-├── types/          # Type definitions
-├── utils/          # Core functions
-├── constants/      # Configuration
-├── common/         # Common utilities
-├── form/           # Form validation
-└── examples/       # Usage examples
+├── form/           # zodValidator
+├── common/         # normalizeFileSize  
+└── security/       # maskPhoneNumbers
 ```
 
-### Import Strategies
+### Usage
 
-**Recommended: Subpath imports** (Best for tree-shaking)
+**Only import from specific modules:**
+
 ```typescript
+import { zodValidator } from 'orbit-labs/form';
 import { normalizeFileSize } from 'orbit-labs/common';
-import { validateForm } from 'orbit-labs/form';
-import type { FormErrors } from 'orbit-labs/types';
-```
+import { maskPhoneNumbers } from 'orbit-labs/security';
+```## 🎯 Examples
 
-**Also valid: Granular imports**
-```typescript
-import { normalizeFileSize } from 'orbit-labs/utils';
-import { FILE_SIZE_UNITS } from 'orbit-labs/constants';
-```
-**Recommended: Subpath imports** (Best for tree-shaking)
-```typescript
-**Fallback: Main entry**
-```typescript
-import { normalizeFileSize, zodValidator } from 'orbit-labs';
-```🎯 Advanced Usage
-
-### Complex Form Validation
-
-### Complex Form Validation
+### Form Validation
 
 ```typescript
-const userSchema = z.object({
-  profile: z.object({
-    firstName: z.string().min(1),
-    lastName: z.string().min(1),
-    age: z.number().min(0).max(150),
-  }),
-  preferences: z.object({
-    notifications: z.boolean(),
-    theme: z.enum(['light', 'dark', 'auto']),
+import { z } from 'zod';
+import { zodValidator } from 'orbit-labs/form';
+
+// Nested validation
+const schema = z.object({
+  user: z.object({
+    name: z.string().min(1),
+    email: z.string().email(),
   }),
 });
 
-const errors = zodValidator(userSchema, userData);
+const errors = zodValidator(schema, {
+  user: { name: '', email: 'invalid' },
+});
+// { "user.name": "Required", "user.email": "Invalid email" }
+```
 
-if (Object.keys(errors).length === 0) {
-  console.log('All valid!');
-} else {
-  Object.entries(errors).forEach(([field, message]) => {
-    console.log(`${field}: ${message}`);
-  });
-}
-``` Type-Safe Helpers
-### Type-Safe Helpers
+### File Size Utilities
 
 ```typescript
-import type { NormalizedFileSize, FileSizeUnit } from 'orbit-labs/types';
-import { FILE_SIZE_UNITS, FIELD_PATH_SEPARATOR } from 'orbit-labs/constants';
+import { normalizeFileSize } from 'orbit-labs/common';
 
-const isLargeFile = (size: NormalizedFileSize): boolean => {
-  const largeUnits: FileSizeUnit[] = ['GB', 'TB'];
-  return largeUnits.includes(size.unit);
-};
+normalizeFileSize(1536000);
+// { size: "1.46 MB", unit: "MB", value: 1.46, bytes: 1536000 }
+```
 
-// Parse nested field paths
+### Phone Number Masking
+
+```typescript
+import { maskPhoneNumbers } from 'orbit-labs/security';
+
+// Multiple numbers
+const text = 'US: +1 415-555-0123, UK: +44 20 7946 0958';
+maskPhoneNumbers(text, { allowedCountries: ['US'] });
+// "US: +* ***-***-**23, UK: +44 20 7946 0958"
+```
+
 ### Error Handling
 
 ```typescript
-import { zodValidator, FIELD_PATH_SEPARATOR } from 'orbit-labs/form';
+import { zodValidator } from 'orbit-labs/form';
+import { normalizeFileSize } from 'orbit-labs/common';
 
+// Form errors
 const errors = zodValidator(schema, data);
-
-Object.entries(errors).forEach(([path, message]) => {
-  const fields = path.split(FIELD_PATH_SEPARATOR);
-  console.log(`Error in ${fields.join(' → ')}: ${message}`);
-});
-```f (error instanceof RangeError) {
-    console.error('Invalid input:', error.message);
-  }
+if (Object.keys(errors).length > 0) {
+  console.error('Validation failed:', errors);
 }
-```
-### Types Module (`orbit-labs/types`)
 
-```typescript
-type FileSizeUnit = 'Bytes' | 'KB' | 'MB' | 'GB' | 'TB';
-
-interface NormalizedFileSize {
-  readonly size: string;
-  readonly unit: FileSizeUnit;
-  readonly value: number;
-  readonly bytes: number;
+// File size errors
+try {
+  normalizeFileSize(-100); // RangeError: bytes must be >= 0
+} catch (error) {
+  console.error(error.message);
 }
-```e ValidationResult<T> =
-  | { success: true; data: T }
-  | { success: false; errors: FormErrors };
-```
-
-### Constants Module (`orbit-labs/constants`)
-
-```typescript
-FILE_SIZE_UNITS: readonly FileSizeUnit[]
-BYTES_PER_KB: 1024
-MAX_SAFE_FILE_SIZE: number
-ROOT_ERROR_KEY: '_root'
-FIELD_PATH_SEPARATOR: '.'
-```
-
-## 🛠️ Development
-
-```bash
-# Install dependencies
-npm install
-
-# Build
-npm run build
-
-# Watch mode
-npm run build:watch
-
-# Type check
-npm run typecheck
-
-# Lint
-npm run lint
-
-# Format
-npm run format
 ```
 
 ## 📄 Requirements
 
-- **Node.js** >= 16.0.0
-- **TypeScript** >= 5.0.0 (if using TypeScript)
-- **Zod** >= 3.0.0 (peer dependency)
+- **Node.js** >= 18.0.0
+- **Zod** ^3.0.0 || ^4.0.0 (required for `orbit-labs/form`)
+- **libphonenumber-js** ^1.11.0 (optional, for `orbit-labs/security`)
 
 ## 🤝 Contributing
 

@@ -2,52 +2,56 @@
 
 Thank you for your interest in contributing! 🎉
 
-## 🚀 Release Process (Fully Automated)
+## 🚀 Quick Start
 
-We use [Release Please](https://github.com/googleapis/release-please) for automated versioning and publishing.
-
-### Flexible Workflow - No Mandatory Branch Structure
-
-**All branches run CI automatically!** You can work with any branch structure you prefer.
-
-### Simple Workflow:
-
-1. **Create a feature branch:**
+1. **Fork and clone:**
    ```bash
-   git checkout main
-   git pull origin main
+   git clone https://github.com/YOUR_USERNAME/orbit-labs.git
+   cd orbit-labs
+   npm install
+   ```
+
+2. **Create a branch:**
+   ```bash
    git checkout -b feat/my-feature
    ```
 
-2. **Make changes with [Conventional Commits](https://www.conventionalcommits.org/):**
+3. **Make changes and test:**
    ```bash
-   git commit -m "feat: add new validation function"
-   git commit -m "fix: resolve edge case"
-   git commit -m "docs: update examples"
+   npm run build
+   npm run typecheck
+   npm run lint
    ```
 
-3. **Push and create a Pull Request:**
+4. **Commit using [Conventional Commits](https://www.conventionalcommits.org/):**
+   ```bash
+   git commit -m "feat: add new feature"
+   git commit -m "fix: resolve bug"
+   git commit -m "docs: update documentation"
+   ```
+
+5. **Push and create PR:**
    ```bash
    git push origin feat/my-feature
    ```
-   - ✅ CI runs automatically (tests, types, build, lint, format)
-   - ✅ Tests on Node.js 18.x and 20.x
-   - Get feedback before merging!
 
-4. **Merge to main:**
-   - ✅ CI runs again
-   - ✅ Release Please analyzes commits
-   - ✅ Creates a **Release PR** with:
-     - Version bump (semantic versioning)
-     - Updated CHANGELOG.md
-     - Updated package.json
+## 📝 Commit Convention
 
-5. **Review and merge the Release PR:**
-   - 🚀 **Auto-publishes to NPM**
-   - 🏷️ Creates GitHub release & tag
-   - 📝 CHANGELOG updated
+- `feat:` - New feature (minor version)
+- `fix:` - Bug fix (patch version)
+- `docs:` - Documentation only
+- `chore:` - Maintenance tasks
+- `feat!:` or `BREAKING CHANGE:` - Breaking change (major version)
 
-### Optional: Custom Branch Strategy
+## 🔄 Release Process
+
+Releases are automated using Release Please:
+- Merge to `main` → Release Please creates release PR
+- Merge release PR → Auto-publishes to NPM
+
+## 📄 License
+
+By contributing, you agree that your contributions will be licensed under the MIT License.
 
 You can use any branch structure that fits your workflow:
 
