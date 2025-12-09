@@ -6,6 +6,8 @@
 
 A production-ready, highly scalable, type-safe utility library for form validation and common operations. Built with modern best practices and designed for enterprise applications.
 
+## ✨ Features
+
 - 🔒 **Fully Type-Safe** - Strict TypeScript with 15+ compiler checks
 - 📦 **Tree-Shakeable** - Import only what you need with ES modules
 - 🎯 **Zero Dependencies** - Only peer dependency on Zod for validation
@@ -14,6 +16,7 @@ A production-ready, highly scalable, type-safe utility library for form validati
 - 📝 **Well Documented** - JSDoc comments for excellent IDE support
 - 🚀 **High Performance** - Optimized algorithms with minimal overhead
 - 🧪 **Type Tested** - Strict TypeScript catches issues at compile time
+- 🤖 **Automated Releases** - Semantic versioning with Release Please
 
 ## 📦 Installation
 

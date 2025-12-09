@@ -2,6 +2,54 @@
 
 Thank you for your interest in contributing to orbit-labs! This document provides guidelines and instructions for contributing.
 
+## 🚀 Release Process (Automated)
+
+We use [Release Please](https://github.com/googleapis/release-please) to automate versioning and releases.
+
+### How it Works:
+
+1. **Make changes and commit** using [Conventional Commits](https://www.conventionalcommits.org/):
+   ```bash
+   git commit -m "feat: add new validation function"
+   git commit -m "fix: resolve edge case in zodValidator"
+   git commit -m "docs: update README examples"
+   ```
+
+2. **Push to main branch** (after PR merge):
+   ```bash
+   git push origin main
+   ```
+
+3. **Release Please creates a PR** automatically with:
+   - Updated version in `package.json`
+   - Updated `CHANGELOG.md`
+   - Proper semantic version based on commits
+
+4. **Merge the Release PR** → Package is automatically:
+   - Built and published to NPM
+   - Tagged on GitHub
+
+### Commit Message Format:
+
+Follow [Conventional Commits](https://www.conventionalcommits.org/):
+
+- `feat:` → Minor version bump (2.0.0 → 2.1.0)
+- `fix:` → Patch version bump (2.0.0 → 2.0.1)
+- `docs:` → No version bump
+- `chore:` → No version bump
+- `refactor:` → No version bump
+- `feat!:` or `BREAKING CHANGE:` → Major version bump (2.0.0 → 3.0.0)
+
+**Examples:**
+```bash
+feat: add zodValidator function
+fix: handle nested object validation
+docs: update API documentation
+chore: update dependencies
+refactor: optimize file size calculation
+feat!: remove deprecated validateForm function
+```
+
 ## Development Setup
 
 1. **Fork and clone the repository**
