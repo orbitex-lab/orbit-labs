@@ -68,15 +68,16 @@
     }
   },
   "peerDependencies": {
+    "libphonenumber-js": "^1.11.0",
     "zod": "^3.0.0 || ^4.0.0"
   },
   "peerDependenciesMeta": {
     "zod": {
-      "optional": false
+      "optional": true
+    },
+    "libphonenumber-js": {
+      "optional": true
     }
-  },
-  "dependencies": {
-    "libphonenumber-js": "^1.12.31"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^8.18.2",
