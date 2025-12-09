@@ -67,11 +67,21 @@
   },
   "typesVersions": {
     "*": {
-      "common": ["./dist/common/index.d.ts"],
-      "form": ["./dist/form/index.d.ts"],
-      "types": ["./dist/types/index.d.ts"],
-      "utils": ["./dist/utils/index.d.ts"],
-      "constants": ["./dist/constants/index.d.ts"]
+      "common": [
+        "./dist/common/index.d.ts"
+      ],
+      "form": [
+        "./dist/form/index.d.ts"
+      ],
+      "types": [
+        "./dist/types/index.d.ts"
+      ],
+      "utils": [
+        "./dist/utils/index.d.ts"
+      ],
+      "constants": [
+        "./dist/constants/index.d.ts"
+      ]
     }
   },
   "peerDependencies": {
