@@ -4,18 +4,57 @@ Thank you for your interest in contributing to orbit-labs! This document provide
 
 ## 🚀 Release Process (Automated)
 
-We use [Release Please](https://github.com/googleapis/release-please) to automate versioning and releases.
+We use [Release Please](https://github.com/googleapis/release-please) with a **three-branch workflow**:
 
-### How it Works:
+```
+feature → develop → staging → main → NPM
+### Workflow Steps:
 
-1. **Make changes and commit** using [Conventional Commits](https://www.conventionalcommits.org/):
+1. **Create feature branch from `develop`:**
+   ```bash
+   git checkout develop
+   git checkout -b feat/my-feature
+   ```
+
+2. **Commit with [Conventional Commits](https://www.conventionalcommits.org/):**
    ```bash
    git commit -m "feat: add new validation function"
    git commit -m "fix: resolve edge case in zodValidator"
    git commit -m "docs: update README examples"
    ```
 
-2. **Push to main branch** (after PR merge):
+3. **Merge to `develop` (integration testing):**
+   ```bash
+   git checkout develop
+   git merge feat/my-feature
+   git push origin develop
+   ```
+   - ✅ CI runs (tests, builds, formatting)
+   - ❌ No publish
+
+4. **Merge `develop` to `staging` (pre-release validation):**
+   ```bash
+   git checkout staging
+   git merge develop
+   git push origin staging
+   ```
+   - ✅ CI runs + staging deployment workflow
+   - ✅ Build artifacts validated
+   - ❌ No publish (safe testing environment)
+
+5. **Merge `staging` to `main` (production release):**
+   ```bash
+   git checkout main
+   git merge staging
+   git push origin main
+   ```
+   - ✅ CI runs
+   - ✅ **Release Please creates a release PR** with version bump
+
+6. **Merge the Release PR:**
+   - 🚀 **Auto-publishes to NPM**
+   - 🏷️ Creates GitHub release tag
+   - 📝 Updates CHANGELOG.mdnch** (after PR merge):
    ```bash
    git push origin main
    ```

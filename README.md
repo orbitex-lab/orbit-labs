@@ -436,6 +436,26 @@ import type { NormalizedFileSize } from 'orbit-labs/common';
 - TypeScript >= 5.0.0 (if using TypeScript)
 - Zod >= 3.0.0 (peer dependency)
 
+## 🔄 Development Workflow
+
+We use a three-branch strategy for safe releases:
+
+```
+feature → develop → staging → main → NPM
+```
+
+- **`develop`** - Active development, frequent commits
+- **`staging`** - Pre-release testing, stable features  
+- **`main`** - Production releases, triggers NPM publish
+
+### Contributing:
+1. Create feature branch from `develop`
+2. Merge to `develop` for integration testing
+3. Merge to `staging` for pre-release validation
+4. Merge to `main` for NPM release (automated)
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
+
 ## License
 
 MIT
