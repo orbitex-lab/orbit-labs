@@ -4,7 +4,7 @@
  */
 
 import { findPhoneNumbersInText } from 'libphonenumber-js';
-import type { MaskPhoneNumberOptions } from '../../types/security.types';
+import type { MaskPhoneNumberOptions } from '../../types/security.types.js';
 
 /**
  * Masks phone numbers in arbitrary text for (virtually) all countries.

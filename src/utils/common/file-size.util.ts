@@ -6,7 +6,7 @@
 import type {
   FileSizeUnit,
   NormalizedFileSize,
-} from '../../types/common.types';
+} from '../../types/common.types.js';
 
 /**
  * Normalizes a file size in bytes to a human-readable format

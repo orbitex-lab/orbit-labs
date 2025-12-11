@@ -4,10 +4,10 @@
  */
 
 // File size utilities
-export { normalizeFileSize } from './common/file-size.util';
+export { normalizeFileSize } from './common/file-size.util.js';
 
 // Validation utilities
 export { zodValidator } from './form/validation.util.js';
 
 // Phone masking utilities
-export { maskPhoneNumbers } from './security/phone-masking.util';
+export { maskPhoneNumbers } from './security/phone-masking.util.js';

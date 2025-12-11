@@ -3,7 +3,7 @@
  * @description Constants related to file size operations
  */
 
-import type { FileSizeUnit } from '../types/common.types';
+import type { FileSizeUnit } from '../types/common.types.js';
 
 /**
  * File size units in order from smallest to largest

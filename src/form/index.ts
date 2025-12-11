@@ -3,4 +3,4 @@
  * @description Form validation with Zod
  */
 
-export { zodValidator } from '../utils';
+export { zodValidator } from '../utils/index.js';

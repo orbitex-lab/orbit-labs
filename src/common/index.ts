@@ -8,4 +8,4 @@ export type {
   NormalizedFileSize,
 } from '../types/common.types.js';
 
-export { normalizeFileSize } from '../utils';
+export { normalizeFileSize } from '../utils/index.js';

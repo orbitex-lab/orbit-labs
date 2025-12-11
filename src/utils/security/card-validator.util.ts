@@ -26,7 +26,7 @@ import type {
   CardValidationResult,
   CardProvider,
   CardType,
-} from '../../types/security.types';
+} from '../../types/security.types.js';
 
 export function validateCard(cardNumber: string): CardValidationResult {
   const invalidResult: CardValidationResult = {
