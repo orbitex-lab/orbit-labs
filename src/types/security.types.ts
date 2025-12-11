@@ -34,3 +34,52 @@ export interface MaskPhoneNumberOptions {
    */
   allowedCountries?: CountryCode[];
 }
+
+/**
+ * Card providers supported by the validator
+ */
+export type CardProvider =
+  | 'Visa'
+  | 'Mastercard'
+  | 'American Express'
+  | 'Discover'
+  | 'Diners Club'
+  | 'JCB'
+  | 'UnionPay'
+  | 'Maestro'
+  | 'Others';
+
+/**
+ * Card type classification
+ */
+export type CardType = 'Credit' | 'Debit' | 'Unknown';
+
+/**
+ * Result of card validation
+ */
+export interface CardValidationResult {
+  /**
+   * Whether the card number is valid (passes Luhn algorithm)
+   */
+  readonly isValid: boolean;
+
+  /**
+   * Card type (Credit, Debit, or Unknown)
+   */
+  readonly type: CardType | null;
+
+  /**
+   * Card provider/network
+   */
+  readonly provider: CardProvider | null;
+
+  /**
+   * Formatted card number with spaces (only if valid)
+   */
+  readonly formatted?: string;
+
+  /**
+   * Last 4 digits of the card (only if valid)
+   */
+  readonly lastFour?: string;
+}

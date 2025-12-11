@@ -4,7 +4,7 @@
  */
 
 // Common types
-export type { FileSizeUnit, NormalizedFileSize } from './common.types.js';
+export type { FileSizeUnit, NormalizedFileSize } from './common.types';
 
 // Security types
-export type { MaskPhoneNumberOptions } from './security.types.js';
+export type { MaskPhoneNumberOptions } from './security.types';

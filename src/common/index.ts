@@ -7,4 +7,5 @@ export type {
   FileSizeUnit,
   NormalizedFileSize,
 } from '../types/common.types.js';
-export { normalizeFileSize } from '../utils/file-size.util.js';
+
+export { normalizeFileSize } from '../utils';
